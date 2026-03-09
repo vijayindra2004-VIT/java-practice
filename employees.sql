@@ -20,8 +20,6 @@ VALUES
 ('Vamshik', 'Marketing', 'Manager', 52000, 'vamshik@gmail.com', '9112233445', '2022-08-15', 'Chennai'),
 ('Rohith', 'Producation', 'assistant', 40000, 'rahul@gamil.com', 9080706050, '2021-12-01', 'Lucknow');
 
-SELECT * FROM employees WHERE name=?;
-
 select * from employees;
 
 

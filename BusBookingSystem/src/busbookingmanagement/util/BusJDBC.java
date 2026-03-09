@@ -9,9 +9,9 @@ public class BusJDBC {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection(
-				"jdbc:mysql://localhost:3306/BusBookingSystem",
+				"jdbc:mysql://localhost:3306/busbookingSystem",
 				"root",
-				"Guru@24748");
+				"Vijay@777");
 		return con;
 		
 	}
