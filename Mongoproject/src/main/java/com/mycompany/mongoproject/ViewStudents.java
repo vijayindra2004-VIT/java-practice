@@ -35,22 +35,24 @@ public class ViewStudents extends javax.swing.JFrame {
         studentTable = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        btnAcademics = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "SLNO", "ID", "Name", "Age", "Branch"
+                "SLNO", "ID", "Name", "Gender", "Age", "Branch"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -61,7 +63,7 @@ public class ViewStudents extends javax.swing.JFrame {
         if (studentTable.getColumnModel().getColumnCount() > 0) {
             studentTable.getColumnModel().getColumn(0).setPreferredWidth(10);
             studentTable.getColumnModel().getColumn(1).setPreferredWidth(10);
-            studentTable.getColumnModel().getColumn(3).setPreferredWidth(10);
+            studentTable.getColumnModel().getColumn(4).setPreferredWidth(10);
         }
 
         btnDelete.setText("Delete");
@@ -69,6 +71,12 @@ public class ViewStudents extends javax.swing.JFrame {
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(this::btnUpdateActionPerformed);
+
+        btnAcademics.setText("Academics");
+        btnAcademics.addActionListener(this::btnAcademicsActionPerformed);
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(this::btnBackActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,8 +86,12 @@ public class ViewStudents extends javax.swing.JFrame {
                 .addGap(114, 114, 114)
                 .addComponent(btnDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAcademics)
+                .addGap(18, 18, 18)
                 .addComponent(btnUpdate)
-                .addGap(131, 131, 131))
+                .addGap(40, 40, 40)
+                .addComponent(btnBack)
+                .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -90,10 +102,16 @@ public class ViewStudents extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelete)
-                    .addComponent(btnUpdate))
-                .addGap(25, 25, 25))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDelete)
+                            .addComponent(btnUpdate)
+                            .addComponent(btnAcademics))
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addContainerGap())))
         );
 
         pack();
@@ -134,14 +152,16 @@ int row = studentTable.getSelectedRow();
 
         int id = (int) studentTable.getValueAt(row, 1);
         String currentName = studentTable.getValueAt(row, 2).toString();
-        int currentAge = (int) studentTable.getValueAt(row, 3);
-        String currentBranch = studentTable.getValueAt(row, 4).toString();
+        String currentGender = studentTable.getValueAt(row, 3).toString();
+        int currentAge = (int) studentTable.getValueAt(row, 4);
+        String currentBranch = studentTable.getValueAt(row, 5).toString();
 
         try {
 
             String newName = javax.swing.JOptionPane.showInputDialog(this, "Enter Name", currentName);
             int newAge = Integer.parseInt(javax.swing.JOptionPane.showInputDialog(this, "Enter Age", currentAge));
             String newBranch = javax.swing.JOptionPane.showInputDialog(this, "Enter Branch", currentBranch);
+            String newGender = javax.swing.JOptionPane.showInputDialog(this, "Enter Gender", currentGender);
 
             var database = MongoConfig.getDatabase();
             var collection = database.getCollection("Students");
@@ -150,6 +170,7 @@ int row = studentTable.getSelectedRow();
 
             org.bson.Document update = new org.bson.Document("$set",
                     new org.bson.Document("name", newName)
+                            .append("gender", newGender)
                             .append("age", newAge)
                             .append("branch", newBranch));
 
@@ -163,6 +184,18 @@ int row = studentTable.getSelectedRow();
             javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnAcademicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcademicsActionPerformed
+        // TODO add your handling code here:
+        new AcademicScores().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAcademicsActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        new Registration().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void loadStudents() {
     try {
@@ -183,8 +216,9 @@ int row = studentTable.getSelectedRow();
                 String name = doc.getString("name");
                 int age = doc.getInteger("age");
                 String branch = doc.getString("branch");
+                String gender = doc.getString("gender");
 
-                model.addRow(new Object[]{slNo++, id, name, age, branch});
+                model.addRow(new Object[]{slNo++, id, name, gender, age, branch});
             }
 
         } catch (Exception e) {
@@ -217,6 +251,8 @@ int row = studentTable.getSelectedRow();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAcademics;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane1;
