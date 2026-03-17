@@ -130,8 +130,10 @@ int row = studentTable.getSelectedRow();
         try {
             var database = MongoConfig.getDatabase();
             var collection = database.getCollection("Students");
+            var collection1 = database.getCollection("results");
 
             collection.deleteOne(new org.bson.Document("id", id));
+            collection1.deleteOne(new org.bson.Document("id", id));
 
             javax.swing.JOptionPane.showMessageDialog(this, "Deleted Successfully");
 
