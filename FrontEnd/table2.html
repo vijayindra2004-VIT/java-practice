@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Interactive table</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #f4f4f9;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #add;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .table-container {
+            width: 100%;
+            max-height: 400px;
+            overflow: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th,
+        td {
+            padding: 20px;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #eee;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
+            z-index: 10;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f7ff;
+            cursor: pointer;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>Inventory Management</h2>
+    <input type="text" id="searchInput" onkeyup="filterTable()"
+    placeholder="Serach by name, ID, or status...">
+
+    <div class="table-container">
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>Item ID</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#1001</td>
+                    <td>MacBook Pro</td>
+                    <td>Electronics</td>
+                    <td style="color: green; font-weight: bold;">in Stock</td>
+                    <td>$1,999</td>
+                </tr>
+                <tr>
+                    <td>#1002</td>
+                    <td>Dell Xps 13</td>
+                    <td>Electronics</td>
+                    <td style="color: green; font-weight: bold;">In Stock</td>
+                    <td>$1,199</td>
+                </tr>
+                <tr>
+                    <td>#1003</td>
+                    <td>iPhone 15</td>
+                    <td>Mobile</td>
+                    <td style="color: green; font-weight: bold;">In Stock</td>
+                    <td>$899</td>
+                </tr>
+                <tr>
+                    <td>#1004</td>
+                    <td>Mechanical Keyboard</td>
+                    <td>Accessories</td>
+                    <td style="color: red; font-weight: bold;">Out Of Stock</td>
+                    <td>$150</td>
+                </tr>
+                <tr>
+                    <td>#1005</td>
+                    <td>Gaming Mouse </td>
+                    <td>Accessories</td>
+                    <td style="color: green; font-weight: bold;">In Stock</td>
+                    <td>$80</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function filterTable() {
+
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("myTable");
+            const tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let rowText = tr[i].textContent.toLowerCase();
+
+                if (rowText.includes(filter)) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

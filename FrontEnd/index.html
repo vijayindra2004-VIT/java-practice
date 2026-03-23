@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .table-container{width: 100%;
+        overflow-x: auto;
+        }
+        table{width: 100%;
+        border-collapse: collapse;
+        font-family: sans-serif;
+        }
+        th, td{padding: 20px;
+        text-align: center;
+        vertical-align: middle;
+        border-bottom: 1px solid #ddd;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #c98a8a;
+        }
+        tbody tr:hover {
+            background-color: #63c2fa;
+        }
+</style>
+</head>
+<body>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Alice</td>
+                    <td>30</td>
+                    <td>New York</td>
+                </tr>
+                <tr>
+                    <td>Bob</td>
+                    <td>25</td>
+                    <td>Los Angles</td>
+                </tr>
+                <tr>
+                    <td>Diana</td>
+                    <td>28</td>
+                    <td>Houstan</td>
+                </tr>
+                <tr>
+                    <td>Nancy</td>
+                    <td>22</td>
+                    <td>Hokins</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Interactive Table</title>
+    <style>
+        body {
+            font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #searchInput {
+            flex-grow: 1;
+            padding: 12px;
+            border: 2px solid #add;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #searchInput:focus {
+            border-color: #007bff;
+        }
+
+        .table-container {
+            width: 100%;
+            max-height: 500px;
+            overflow: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgbs(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        /*Sticky Header & Sorting UI */
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
+            z-index: 10;
+            cursor: pointer;
+            /* show user they can click to sort*/
+            user-select: none;
+            transition: background 0.2s;
+            padding: 20px;
+            text-align: center;
+        }
+
+        thead th:hover {
+            background-color: #444;
+        }
+
+        thead th::after {
+            content: '↕';
+            font-size: 0.8em;
+            opacity: 0.5;
+        }
+
+        /* cell styling*/
+
+        td {
+            padding: 20px;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+
+        /* hover & stripes*/
+
+        tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        tbody tr:hover {
+            background-color: #edf2ff;
+            transition: 0.2s;
+        }
+
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+
+        .in-stock {
+            background-color: #e6ffed;
+            color: #22863a;
+        }
+
+        .low-stock {
+            background-color: #fff8ef;
+            color: #b78103;
+        }
+
+        .out-stock {
+            background-color: #ffeef0;
+            color: #cf222e;
+        }
+    </style>
+</head>
+<body>
+    <h2>Product Inventory</h2>
+    <p><small>Click headers to <b>sort</b> | Use box to <b>Search</b></small></p>
+    <div class="controls">
+        <input type="text" id="searchInput" onkeyup="filterTable()"
+        placeholder="Search Inventory....">
+    </div>
+
+    <div class="table-container">
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">ID</th>
+                    <th onclick="sortTable(1)">Product</th>
+                    <th onclick="sortTable(2)">Category</th>
+                    <th onclick="sortTable(3)">Status</th>
+                    <th onclick="sortTable(4)">Price ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1001</td>
+                    <td>MacBook Pro</td>
+                    <td>Electronics</td>
+                    <td> <span class="status in-stock">In Stock</span></td>
+                    <td>$1,999</td>
+                </tr>
+                <tr>
+                    <td>1002</td>
+                    <td>Dell Xps 13</td>
+                    <td>Electronics</td>
+                    <td> <span class="status in-stock">In Stock</span></td>
+                    <td>$1,199</td>
+                </tr>
+                <tr>
+                    <td>1003</td>
+                    <td>iPhone 15</td>
+                    <td>Mobile</td>
+                    <td> <span class="status in-stock">In Stock</span></td>
+                    <td>$899</td>
+                </tr>
+                <tr>
+                    <td>1004</td>
+                    <td>Mechanical Keyboard</td>
+                    <td>Accessories</td>
+                    <td><span class="status out-stock">out of Stock</span></td>
+                    <td>$150</td>
+                </tr>
+                <tr>
+                    <td>1005</td>
+                    <td>Gaming Mouse </td>
+                    <td>Accessories</td>
+                    <td><span class="status in-stock">In Stock</span></td>
+                    <td>$80</td>
+</tbody>
+        </table>
+    </div>
+    <script>
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.querySelector('.table-container table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let match = false;
+
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j]) {
+                        const cellText = cells[j].textContent || cells[j].innerText;
+                        if (cellText.toLowerCase().indexOf(filter) > -1) {
+                            match = true;
+                            break;
+                        }
+                    }
+                }
+
+                rows[i].style.display = match ? '' : 'none';
+            }
+        }
+        function sortTable(columnIndex) {
+            const table = document.getElementById('myTable');
+            const rows = Array.from(table.rows).slice(1);
+            const isNumeric = !isNaN(rows[0].cells[columnIndex].innerText.trim().replace(/[^0-9.-]+/g,""));
+            const sortedRows = rows.sort((a, b) => {
+                let aText = a.cells[columnIndex].innerText.trim();
+                let bText = b.cells[columnIndex].innerText.trim();
+
+                if (isNumeric) {
+                    aText = parseFloat(aText.replace(/[^0-9.-]+/g,""));
+                    bText = parseFloat(bText.replace(/[^0-9.-]+/g,""));
+                }
+
+                return aText > bText ? 1 : -1;
+            });
+
+            sortedRows.forEach(row => table.appendChild(row));
+        }
+    </script>
+</body>
+
+</html>
