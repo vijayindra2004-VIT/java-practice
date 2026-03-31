@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Finder | Internship Project</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --bg: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-location {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-location:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        #status {
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .result-box p {
+            margin: 5px 0;
+            font-family: monospace;
+        }
+
+        #map-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        #map-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Location Tracker</h1>
+        <button class="btn-location" id="find-me">Get My Location</button>
+        
+        <p id="status"></p>
+        
+        <div class="result-box" id="result">
+            <p><strong>Latitude:</strong> <span id="lat"></span></p>
+            <p><strong>Longitude:</strong> <span id="long"></span></p>
+            <a id="map-link" target="_blank">View on Google Maps</a>
+        </div>
+    </div>
+
+    <script>
+        const status = document.querySelector('#status');
+        const resultBox = document.querySelector('#result');
+        const latSpan = document.querySelector('#lat');
+        const longSpan = document.querySelector('#long');
+        const mapLink = document.querySelector('#map-link');
+
+        function geoFindMe() {
+            // Reset UI
+            mapLink.href = '';
+            mapLink.textContent = '';
+            resultBox.style.display = 'none';
+
+            function success(position) {
+                const latitude  = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                status.textContent = '';
+                resultBox.style.display = 'block';
+                latSpan.textContent = latitude;
+                longSpan.textContent = longitude;
+                
+                mapLink.href = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                mapLink.textContent = 'Open in Google Maps';
+            }
+
+            function error() {
+                status.textContent = 'Unable to retrieve your location. Please enable GPS.';
+                status.style.color = '#ef4444';
+            }
+
+            if (!navigator.geolocation) {
+                status.textContent = 'Geolocation is not supported by your browser';
+            } else {
+                status.textContent = 'Locating...';
+                status.style.color = '#64748b';
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+        }
+
+        document.querySelector('#find-me').addEventListener('click', geoFindMe);
+    </script>
+</body>
+</html>

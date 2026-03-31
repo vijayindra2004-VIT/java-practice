@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijay Indra Tejas | Portfolio</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary: #2563eb;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5% 4rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            text-align: center;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Container for Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card .date {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-tag {
+            background: var(--light);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            font-weight: 500;
+        }
+
+        /* Contact */
+        #contact {
+            background: var(--dark);
+            color: white;
+            min-height: 50vh;
+            text-align: center;
+        }
+
+        #contact .section-title {
+            color: white;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .contact-links a:hover {
+            color: #93c5fd;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* Can be replaced with a hamburger menu later */
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>GM.</h1>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Vijay Indra Tejas</h1>
+            <p>Engineer & Java Full Stack Intern. Specializing in IoT systems, backend development, and building robust autonomous applications.</p>
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Experience & Education</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Java Full Stack Intern</h3>
+                <strong>Ethnotech PVT Ltd | Bengaluru</strong>
+                <span class="date">Feb 2026 - Present</span>
+                <p>Developing full-stack applications and collaborating on scalable software solutions.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Engineering Student</h3>
+                <strong>East West Institute of Technology</strong>
+                <span class="date">Nov 2022 - Present</span>
+                <p>Focusing on core software engineering concepts, hardware-software integration, and active project development.</p>
+            </div>
+
+            <div class="card">
+                <h3>NPTEL Certification</h3>
+                <strong>Java Programming</strong>
+                <span class="date">Jan 2025 - Apr 2025</span>
+                <p>Completed intensive coursework and certification in core Java programming concepts.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="background: var(--light);">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Vehicle-to-Vehicle Communication</h3>
+                <span class="date">Feb 2025 - Present </span>
+                <p>Developed a system where cars detect road conditions, accidents, and traffic via sensors and cameras.</p>
+            </div>
+
+            <div class="card">
+                <h3>Obstacle-Avoiding Autonomous Car</h3>
+                <span class="date">Oct 2024 - Dec 2024 </span>
+                <p>Designed and implemented a mini robot car that detects obstacles and navigates automatically using basic electronics and microcontrollers.</p>
+            </div>
+
+            <div class="card">
+                <h3>Bus Management System</h3>
+                <span class="date">Academic Project</span>
+                <p>A comprehensive desktop application built for managing bus bookings. Features a complete GUI using Java Swing and robust database management via JDBC.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+            <span class="skill-tag">Java </span>
+            <span class="skill-tag">Spring Boot </span>
+            <span class="skill-tag">JavaScript </span>
+            <span class="skill-tag">C++ </span>
+            <span class="skill-tag">SQL </span>
+            <span class="skill-tag">MongoDB </span>
+            <span class="skill-tag">HTML5 </span>
+            <span class="skill-tag">CSS3 </span>
+            <span class="skill-tag">IoT Sensors</span>
+            <span class="skill-tag">Microcontrollers</span>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <p>Currently open for new opportunities and collaborations.</p>
+        <div class="contact-links">
+            <a href="mailto:vijayindra2004@gmail.com">vijayindra20042gmail.com</a>
+            <span>|</span>
+            <a href="tel:+917019616192">+91 9108088197 </a>
+            <span>|</span>
+            <a href="#">LinkedIn</a>
+            <span>|</span>
+            <a href="#">GitHub</a>
+        </div>
+    </section>
+
+    <script>
+        // Simple fade-in animation for cards as you scroll down
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

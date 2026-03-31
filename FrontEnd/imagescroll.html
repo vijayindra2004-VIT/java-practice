@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider | Internship HW</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #3b82f6;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 { color: var(--primary); margin-bottom: 30px; }
+
+        /* The Main Gallery Container */
+        .gallery-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10% auto;
+            width: 90%;
+            max-width: 1100px;
+        }
+
+        /* The scrollable area */
+        #gallery {
+            width: 900px;
+            display: flex;
+            overflow-x: scroll; /* Enables the scrolling */
+            gap: 20px;
+            padding: 10px;
+            scroll-behavior: smooth;
+        }
+
+        /* Hide the scrollbar for a cleaner look */
+        #gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Individual Images */
+        #gallery div {
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 20px;
+            padding: 10px;
+            flex: none;
+        }
+
+        #gallery img {
+            width: 300px;
+            height: 200px;
+            filter: grayscale(100%);
+            transition: transform 0.5s, filter 0.5s;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #gallery img:hover {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        /* Navigation Buttons */
+        .nav-btn {
+            width: 50px;
+            cursor: pointer;
+            margin: 20px;
+            transition: transform 0.3s;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.2);
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Project Gallery</h1>
+
+    <div class="gallery-wrap">
+        <button class="nav-btn" id="backBtn">&#10094;</button>
+
+        <div id="gallery">
+            <div>
+                <span><img src="jet1.jpg"></span>
+                <span><img src="jet2.jpg"></span>
+                <span><img src="jet3.jpg"></span>
+            </div>
+            <div>
+                <span><img src="jet4.jpg"></span>
+                <span><img src="jet5.jpg"></span>
+                <span><img src="jet6.jpg"></span>
+            </div>
+        </div>
+
+        <button class="nav-btn" id="nextBtn">&#10095;</button>
+    </div>
+
+    <footer>Developed by Vijay Indra Tejas | EWIT Bangalore</footer>
+
+    <script>
+        let scrollContainer = document.getElementById("gallery");
+        let backBtn = document.getElementById("backBtn");
+        let nextBtn = document.getElementById("nextBtn");
+
+        // Feature 1: Mouse Wheel Horizontal Scroll
+        scrollContainer.addEventListener("wheel", (evt) => {
+            evt.preventDefault();
+            // This converts vertical scroll into horizontal scroll
+            scrollContainer.scrollLeft += evt.deltaY;
+            scrollContainer.style.scrollBehavior = "auto";
+        });
+
+        // Feature 2: Button Clicks
+        nextBtn.addEventListener("click", () => {
+            scrollContainer.style.scrollBehavior = "smooth";
+            scrollContainer.scrollLeft += 900;
+        });
+
+        backBtn.addEventListener("click", () => {
+            scrollContainer.style.scrollBehavior = "smooth";
+            scrollContainer.scrollLeft -= 900;
+        });
+    </script>
+
+</body>
+</html>

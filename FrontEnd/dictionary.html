@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijay's Smart Dictionary | Autocomplete</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            padding: 50px 20px;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 { color: purple; text-align: center; margin-bottom: 25px; }
+
+        /* Search Container Logic */
+        .search-wrapper {
+            position: relative; /* Crucial for dropdown positioning */
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--primary); }
+
+        /* The Dropdown List */
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: calc(100% - 90px); /* Matches input width */
+            background: white;
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none; /* Hidden by default */
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #suggestions li {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #suggestions li:hover { background: #f1f5f9; }
+
+        button {
+            padding: 12px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .result { margin-top: 30px; display: none; line-height: 1.6; }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #64748b;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Vijay's Dictionary</h1>
+
+    <div class="search-wrapper">
+        <input type="text" id="inp-word" placeholder="Search a word..." autocomplete="off" />
+        <ul id="suggestions"></ul>
+        <button id="search-btn">Go</button>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <footer>
+        Developed by Vijay Indra Tejas | EWIT Bangalore 
+    </footer>
+</div>
+
+<script>
+    const input = document.getElementById("inp-word");
+    const suggestionsList = document.getElementById("suggestions");
+    const resultDiv = document.getElementById("result");
+    const searchBtn = document.getElementById("search-btn");
+
+    // 1. Function to show meaning
+    const getMeaning = (word) => {
+        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+            .then(res => res.json())
+            .then(data => {
+                resultDiv.style.display = "block";
+                const def = data[0].meanings[0].definitions[0];
+                resultDiv.innerHTML = `
+                    <h2 style="text-transform: capitalize;">${word}</h2>
+                    <p><strong>${data[0].meanings[0].partOfSpeech}</strong></p>
+                    <p>${def.definition}</p>
+                `;
+                suggestionsList.style.display = "none";
+            })
+            .catch(() => {
+                resultDiv.innerHTML = "Word not found.";
+            });
+    };
+
+    // 2. Event: As you type (Dropdown Logic)
+    input.addEventListener("input", () => {
+        const query = input.value;
+        if (query.length < 2) {
+            suggestionsList.style.display = "none";
+            return;
+        }
+
+        // Fetch suggestions from Datamuse API
+        fetch(`https://api.datamuse.com/sug?s=${query}`)
+            .then(res => res.json())
+            .then(data => {
+                suggestionsList.innerHTML = "";
+                if (data.length > 0) {
+                    suggestionsList.style.display = "block";
+                    data.slice(0, 5).forEach(item => {
+                        const li = document.createElement("li");
+                        li.textContent = item.word;
+                        li.onclick = () => {
+                            input.value = item.word;
+                            getMeaning(item.word);
+                        };
+                        suggestionsList.appendChild(li);
+                    });
+                } else {
+                    suggestionsList.style.display = "none";
+                }
+            });
+    });
+
+    // 3. Search on Button Click
+    searchBtn.onclick = () => getMeaning(input.value);
+
+    // Hide suggestions when clicking outside
+    document.addEventListener("click", (e) => {
+        if (e.target !== input) suggestionsList.style.display = "none";
+    });
+</script>
+
+</body>
+</html>

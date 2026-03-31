@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form action="/submit" method="POST">
+    <label>Username:</label>
+    <input type="text" name="useername" placeholder="User"
+    required autofocus><br><br>
+
+    <label>Password:</label>
+    <input type="password" name="pw" minlength="6"
+    required><br><br>
+
+    <label>Age (18-99):</label>
+    <input type="number" name="age" min="18" max="99"
+    step="1"><br><br>
+
+    <label>Upload (PDF):</label>
+    <input type="file" name="resume" accept=".pdf"><br><br>
+
+    <input type="text" value="Readonly" readonly>
+    <input type="text" value="Disabled" disabled><br><br>
+
+    <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
