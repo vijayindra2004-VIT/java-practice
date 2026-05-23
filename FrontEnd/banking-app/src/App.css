@@ -1,0 +1,444 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+}
+
+button {
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* LANDING PAGE */
+
+.landingPage {
+  background: #f5f7fa;
+  color: #222;
+}
+
+.landingNav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #003366;
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.landingNav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 14px;
+  font-weight: bold;
+}
+
+.landingNav button {
+  background: #d71920;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.landingHero {
+  height: 530px;
+  background-image: url("https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1400&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+.heroOverlay {
+  height: 100%;
+  background: rgba(0, 38, 77, 0.75);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 1s ease;
+  padding: 20px;
+}
+
+.heroOverlay h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.heroOverlay p {
+  font-size: 18px;
+  max-width: 700px;
+}
+
+.heroOverlay button {
+  background: #d71920;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.section {
+  background: white;
+  padding: 55px 30px;
+  text-align: center;
+}
+
+.serviceGrid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.serviceCard {
+  background: #004080;
+  color: white;
+  padding: 28px;
+  border-radius: 12px;
+  width: 220px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+  animation: slideUp 0.8s ease;
+}
+
+.about {
+  background: #eef4fb;
+}
+
+.about p {
+  max-width: 760px;
+  margin: auto;
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+.footer {
+  background: #003366;
+  color: white;
+  text-align: center;
+  padding: 18px;
+}
+
+/* LOGIN */
+
+.loginPage {
+  height: 100vh;
+  background: linear-gradient(135deg, #003366, #0059b3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginBox {
+  background: white;
+  width: 350px;
+  padding: 30px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.7s ease;
+}
+
+.demoText {
+  font-size: 13px;
+  color: #555;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.sidebar {
+  width: 240px;
+  background: #003366;
+  color: white;
+  padding: 22px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  margin-bottom: 25px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  background: #004080;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sidebar .logoutBtn {
+  background: #d71920;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 25px;
+  animation: fadeIn 0.6s ease;
+}
+
+.pageBanner {
+  height: 220px;
+  color: white;
+  border-radius: 14px;
+  padding: 45px;
+  margin-bottom: 25px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pageBanner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 38, 77, 0.65);
+}
+
+.pageBanner h1,
+.pageBanner p {
+  position: relative;
+  z-index: 1;
+}
+
+.homeBanner {
+  background-image: url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80");
+}
+
+.accountsBanner {
+  background-image: url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80");
+}
+
+.transactionsBanner {
+  background-image: url("https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=80");
+}
+
+.message {
+  background: #003366;
+  color: white;
+  padding: 10px;
+  border-radius: 7px;
+  margin-bottom: 15px;
+  animation: fadeIn 0.4s ease;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-bottom: 25px;
+}
+
+.statCard {
+  background: white;
+  width: 230px;
+  padding: 22px;
+  text-align: center;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.11);
+  animation: slideUp 0.6s ease;
+}
+
+.statCard p {
+  font-size: 24px;
+  color: #003366;
+  font-weight: bold;
+}
+
+.chartBox,
+.panel {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px;
+}
+
+.chartBox {
+  max-width: 700px;
+  margin: 0 auto 25px auto;
+}
+
+.input {
+  padding: 11px;
+  margin: 8px;
+  min-width: 230px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+}
+
+.primaryBtn {
+  background: #003366;
+  color: white;
+  border: none;
+  padding: 11px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+  margin: 8px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.cardGrid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.accountCard {
+  width: 250px;
+  background: #f9fbff;
+  border: 1px solid #e0e6ef;
+  padding: 20px;
+  margin: 12px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.09);
+  animation: slideUp 0.5s ease;
+}
+
+.depositBtn {
+  background: green;
+  color: white;
+  border: none;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.withdrawBtn {
+  background: #d71920;
+  color: white;
+  border: none;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: white;
+}
+
+.table th {
+  background: #003366;
+  color: white;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.greenText {
+  color: green;
+  font-weight: bold;
+}
+
+.redText {
+  color: #d71920;
+  font-weight: bold;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .landingNav {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .heroOverlay h1 {
+    font-size: 34px;
+  }
+
+  .pageBanner {
+    height: auto;
+  }
+}
